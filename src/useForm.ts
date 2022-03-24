@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   UseForm,
   SetInputValue,
@@ -14,6 +14,8 @@ import {
 const useForm: UseForm = (config = {}) => {
   const [values, setValues] = useState(config.initialValues || {});
   const [formErrors, setFormErrors] = useState(config.initialFormErrors || {});
+
+  const initialState = useMemo(() => config.initialValues || {}, []);
 
   const setInputValue: SetInputValue = (inputName, inputValue) => {
     setValues((prevValues) => ({ ...prevValues, [inputName]: inputValue }));
@@ -47,7 +49,7 @@ const useForm: UseForm = (config = {}) => {
 
   const registerRadio = (
     radionName: string,
-    radioValue: string,
+    radioValue: string
   ): InputHandlers => ({
     onFocus: () => removeInputError(radionName),
     onChange: (event) => {
@@ -59,6 +61,8 @@ const useForm: UseForm = (config = {}) => {
     value: radioValue,
   });
 
+  const reset = () => setValues(initialState);
+
   return {
     setInputValue,
     removeInputError,
@@ -68,6 +72,7 @@ const useForm: UseForm = (config = {}) => {
     registerInput,
     registerCheckbox,
     registerRadio,
+    reset,
   };
 };
 
