@@ -6,7 +6,7 @@ export type RemoveInputError = (inputName: string) => void;
 
 export type SetFormErrors = (inputErrors: object) => void;
 
-export type UseForm = (config: UseFormConfig) => FormHandlers;
+export type UseForm = (config?: UseFormConfig) => FormHandlers;
 
 export type Reset = () => void;
 
