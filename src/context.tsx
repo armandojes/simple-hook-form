@@ -28,6 +28,7 @@ const intialValues: FormHandlers = {
     onFocus: () => {},
     checked: false,
   }),
+  reset: () => {},
 };
 
 const formContext = createContext(intialValues);
